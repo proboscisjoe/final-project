@@ -29,7 +29,7 @@ unsigned int hook_func_in(void *priv,
 
   if (ip_header->daddr == en0_ip_hex)
   {
-    printk("|%pI4|%pI4|\n", &ip_header->saddr, &ip_header->daddr);
+    printk("|%pI4|%pI4|", &ip_header->saddr, &ip_header->daddr);
   }
   return NF_ACCEPT;
 }
@@ -43,7 +43,7 @@ unsigned int hook_func_out(void *priv,
 
   if (ip_header->saddr == en0_ip_hex)
   {
-    printk("|%pI4|%pI4|\n", &ip_header->saddr, &ip_header->daddr);
+    printk("|%pI4|%pI4|", &ip_header->saddr, &ip_header->daddr);
   }
   return NF_ACCEPT;
 }
