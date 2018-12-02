@@ -11,11 +11,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("COP5614 Final Project LKM");
 MODULE_AUTHOR("Franklin Abodo/fabod001@fiu.edu");
 
-static char *en0_ip_str = "127.0.0.1";
-
-module_param(en0_ip_str, charp, S_IRUGO);
-
-static __be32 en0_ip_hex;
+// static char *en0_ip_str = "127.0.0.1";
+//
+// module_param(en0_ip_str, charp, S_IRUGO);
+// 
+// static __be32 en0_ip_hex;
 
 struct nf_hook_ops nfho_in;
 struct nf_hook_ops nfho_out;
@@ -27,10 +27,10 @@ unsigned int hook_func_in(void *priv,
 {
   struct iphdr *ip_header = (struct iphdr *)skb_network_header(skb);
 
-  if (ip_header->daddr == en0_ip_hex)
-  {
+  // if (ip_header->daddr == en0_ip_hex)
+  // {
     printk("|%pI4|%pI4|", &ip_header->saddr, &ip_header->daddr);
-  }
+  // }
   return NF_ACCEPT;
 }
 
@@ -41,10 +41,10 @@ unsigned int hook_func_out(void *priv,
 {
   struct iphdr *ip_header = (struct iphdr *)skb_network_header(skb);
 
-  if (ip_header->saddr == en0_ip_hex)
-  {
+  // if (ip_header->saddr == en0_ip_hex)
+  // {
     printk("|%pI4|%pI4|", &ip_header->saddr, &ip_header->daddr);
-  }
+  // }
   return NF_ACCEPT;
 }
 
@@ -52,7 +52,7 @@ int simple_init(void)
 {
     printk(KERN_INFO "Initializing COP5614 Final Project LKM");
 
-    en0_ip_hex = in_aton(en0_ip_str); //convert octet string to hex integer
+    // en0_ip_hex = in_aton(en0_ip_str); //convert octet string to hex integer
 
     nfho_in.hook = hook_func_in;
     nfho_in.hooknum = NF_INET_LOCAL_IN;
