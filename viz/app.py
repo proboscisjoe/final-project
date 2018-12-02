@@ -35,8 +35,8 @@ def get_image():
         ip_graph = AGraph(directed=True)
 
         for (src_ip, dst_ip), packet_count in ip_dict.items():
-            ip_graph.add_edge(
-                src_ip, dst_ip, color='brown', label=packet_count, labelangle=45, len=1.95)
+            ip_graph.add_edge(src_ip, dst_ip, color='brown', label=packet_count,
+                              labelangle=45, len=1.95)
 
         ip_graph.layout()
 
@@ -45,6 +45,8 @@ def get_image():
         TIMESTAMP = local_timestamp
 
     graph_img = Image.open('graph.png')
+    graph_img.thumbnail((720, 720))
+
     background_image = Image.new('RGB', SIZE, color=(255, 255, 255))
 
     x = round((SIZE[0] / 2.0) - graph_img.width)
